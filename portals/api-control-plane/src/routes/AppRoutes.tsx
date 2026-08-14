@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2026, WSO2 LLC. (https://www.wso2.com).
+ *
+ * WSO2 LLC. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
@@ -12,6 +30,10 @@ import {
 } from '../features/system/SystemPages';
 import { ConsoleScopeProvider } from '../scope/ConsoleScopeProvider';
 import AppLayout from '../layouts/AppLayout';
+import {
+  buildScopedExtensionPath,
+  type ApiControlPlaneExtension,
+} from '../extensions';
 import { ProtectedRoute } from './ProtectedRoute';
 import { routes } from './paths';
 
@@ -82,7 +104,23 @@ const SettingsPage = lazy(() =>
   }))
 );
 
-export function AppRoutes() {
+export type AppRoutesProps = {
+  extensions?: readonly ApiControlPlaneExtension[];
+};
+
+export function AppRoutes({ extensions = [] }: AppRoutesProps) {
+  const extensionRoutes = extensions.map((extension) => (
+    <Route
+      key={extension.id}
+      path={buildScopedExtensionPath(extension.level, extension.routePath, {
+        apiHandler: ':apiHandler',
+        orgHandle: ':orgHandle',
+        projectHandler: ':projectHandler',
+      })}
+      element={extension.element}
+    />
+  ));
+
   return (
     <Routes>
       <Route path={routes.login} element={<LoginPage />} />
@@ -115,6 +153,7 @@ export function AppRoutes() {
           <Route path={routes.apiManage()} element={<ManagePage />} />
           <Route path={routes.runtimeLogs()} element={<RuntimeLogsPage />} />
           <Route path={routes.settings()} element={<SettingsPage />} />
+          {extensionRoutes}
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
