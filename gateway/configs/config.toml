@@ -45,3 +45,15 @@ username        = '{{ env "APIP_GW_CONTROLLER_AUTH_BASIC_ADMIN_USERNAME" "" }}'
 password        = '{{ env "APIP_GW_CONTROLLER_AUTH_BASIC_ADMIN_PASSWORD_HASH" "" }}'
 password_hashed = true
 roles           = ["admin"]
+
+[policy_configurations.llm_cost_v1]
+pricing_file = "/etc/policy-engine/llm-pricing/model_prices.json"
+
+[policy_configurations.llm_cost_v2]
+pricing_file = "/etc/policy-engine/llm-pricing/model_prices.json"
+
+[policy_configurations.llm_cost_v2_1]
+pricing_file = "/etc/policy-engine/llm-pricing/model_prices.json"
+
+[policy_configurations.azure_llm_cost_v0]
+pricing_file = "/etc/policy-engine/llm-pricing/model_prices.json"

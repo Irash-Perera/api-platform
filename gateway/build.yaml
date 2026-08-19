@@ -14,6 +14,8 @@ policies:
     gomodule: github.com/wso2/gateway-controllers/policies/aws-bedrock-guardrail@v1
   - name: azure-content-safety-content-moderation
     gomodule: github.com/wso2/gateway-controllers/policies/azure-content-safety-content-moderation@v1
+  # - name: azure-llm-cost
+  #   filePath: ./dev-policies/azure-llm-cost
   - name: backend-jwt
     gomodule: github.com/wso2/gateway-controllers/policies/backend-jwt@v1
   - name: basic-auth
@@ -40,6 +42,10 @@ policies:
     gomodule: github.com/wso2/gateway-controllers/policies/jwt-auth@v1
   - name: llm-cost
     gomodule: github.com/wso2/gateway-controllers/policies/llm-cost@v1
+  # - name: llm-cost-v2
+  #   filePath: ./dev-policies/llm-cost-v2
+  - name: llm-cost-v2-1
+    filePath: ./dev-policies/llm-cost-v2-1
   - name: llm-cost-based-ratelimit
     gomodule: github.com/wso2/gateway-controllers/policies/llm-cost-based-ratelimit@v1
   - name: llm-header-router

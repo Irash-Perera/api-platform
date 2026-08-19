@@ -57,6 +57,9 @@ policies:
     - name: llm-cost
       version: v1.1.0
       gomodule: github.com/wso2/gateway-controllers/policies/llm-cost@v1
+    - name: llm-cost-v2-1
+      version: v0.1.0
+      filePath: ./dev-policies/llm-cost-v2-1
     - name: llm-cost-based-ratelimit
       version: v1.1.1
       gomodule: github.com/wso2/gateway-controllers/policies/llm-cost-based-ratelimit@v1
